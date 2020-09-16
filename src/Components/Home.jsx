@@ -17,26 +17,26 @@ class HomeView extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div className={classes.root}>
-                <Paper className={classes.paper}>
-                    <Grid
-                        container
-                        direction="column"
-                        justify="center"
-                        alignItems="stretch"
-                        spacing={4}
-                    >
-                        <Grid item align="center">
-                            <NavMenuView />
-                        </Grid>
-                        <Grid item align="center">
-                            <h3>
-                                Home
+            <NavMenuView>
+                <div className={classes.root}>
+                    <Paper className={classes.paper}>
+                        <Grid
+                            container
+                            direction="column"
+                            justify="center"
+                            alignItems="stretch"
+                            spacing={4}
+                        >
+                            <Grid item align="center">
+                                <h3>
+                                    Home
                             </h3>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Paper>
-            </div >
+                    </Paper>
+                </div >
+            </NavMenuView>
+
         )
     }
 }

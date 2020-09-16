@@ -19,26 +19,39 @@ import NavMenuView from "./NavMenu";
 class TodoView extends Component {
     render() {
         const { classes } = this.props;
+        const todoState = this.props.todo;
         console.log(this.props.todo)
         return (
-            <div className={classes.root}>
-                <Paper className={classes.paper}>
-                    <Grid
-                        container
-                        direction="column"
-                        justify="center"
-                        alignItems="stretch"
-                        spacing={4}
-                    >
-                        <Grid item align="center">
-                            <NavMenuView />
+            <NavMenuView>
+                <div className={classes.root}>
+                    <Paper className={classes.paper}>
+                        <Grid
+                            container
+                            direction="column"
+                            justify="center"
+                            alignItems="stretch"
+                            spacing={4}
+                        >
+                            <Grid item align="center">
+                                {todoState.map((t, idx) => {
+                                    return (
+                                        <div key={t._id} style={{ flex: 1, flexDirection: "row" }}>
+                                            <input
+                                                type="checkbox"
+                                                // onChange={() => updateDone(idx)}
+                                                checked={t.done}
+                                            />
+                                            <Grid>{t.description}</Grid>
+                                            <Grid>{t.createdBy}</Grid>
+                                        </div>
+                                    );
+                                })}
+                            </Grid>
                         </Grid>
-                        <Grid item align="center">
-                            <label>Check the console</label>
-                        </Grid>
-                    </Grid>
-                </Paper>
-            </div>)
+                    </Paper>
+                </div>
+            </NavMenuView>
+        )
     }
 }
 

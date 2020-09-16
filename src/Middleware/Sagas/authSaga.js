@@ -17,7 +17,7 @@ export function* todoView() {
             axios.get,
             "https://tranquil-everglades-65025.herokuapp.com/get"
         );
-        console.log("reponse", response);
+        console.log("reponse", response.data);
         yield put(todoViewSuccessful(response));
     } catch (err) {
         //yield call(endFetchFun(error.message));
@@ -25,13 +25,12 @@ export function* todoView() {
     }
 }
 
-
-export function* todoCreate(action) {
+export function* createWithAPI(desc, createdby) {
     try {
         console.log("Calling API");
         const response = yield call(
             axios.post,
-            "https://tranquil-everglades-65025.herokuapp.com/create", action.payload
+            "https://tranquil-everglades-65025.herokuapp.com/create", { description: desc, createdBy: createdby },
         );
         console.log("Posted");
         yield put(todoCreateSuccessful());
@@ -39,6 +38,15 @@ export function* todoCreate(action) {
         //yield call(endFetchFun(error.message));
         console.log("error with Post API");
     }
+}
+
+export function* todoCreate({ payload: { desc, createdby } }) {
+    // const { response, err } = 
+    yield call(createWithAPI, desc, createdby);
+
+    // if (response) {
+    //     yield put(todoCreateSuccessful(response));
+    // }
 }
 
 export function* authSagas() {

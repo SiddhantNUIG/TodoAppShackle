@@ -32,9 +32,9 @@ export const todoViewSuccessful = todo => ({
     payload: todo
 });
 
-export const createRequest = ({ description, createdby }) => ({
+export const createRequest = ({ desc, createdby }) => ({
     type: AuthActions.CREATE_TODO_REQ_OPEN,
-    payload: { description, createdby }
+    payload: { desc, createdby }
 });
 
 export const todoCreateSuccessful = () => ({

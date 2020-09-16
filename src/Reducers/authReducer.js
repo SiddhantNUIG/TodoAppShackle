@@ -1,7 +1,8 @@
 import AuthActions from "../Actions/authActions";
 
 const initialState = {
-    currentUser: null
+    currentUser: null,
+    todo: []
 };
 
 const combinedReducer = (state = initialState, action) => {
@@ -21,6 +22,7 @@ const combinedReducer = (state = initialState, action) => {
         case AuthActions.HOME_OPEN:
             return {
                 ...state,
+                anchorEl: null,
                 home: true
             }
 
@@ -28,12 +30,14 @@ const combinedReducer = (state = initialState, action) => {
             return {
                 ...state,
                 todo: action.payload.data,
+                anchorEl: null,
                 viewTodo: true
             }
 
         case AuthActions.CREATE_TODO_OPEN:
             return {
                 ...state,
+                anchorEl: null,
                 create_todo_open: true
             }
 

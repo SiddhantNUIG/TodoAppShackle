@@ -18,14 +18,14 @@ import styles from "./StyleHome";
 
 class TodoCreateView extends Component {
     state = {
-        description: "",
+        desc: "",
         createdby: ""
     };
 
     handleSubmit = event => {
         event.preventDefault();
         this.props.createRequest({
-            description: this.state.description,
+            desc: this.state.desc,
             createdby: this.state.createdby
         });
     };
@@ -34,86 +34,85 @@ class TodoCreateView extends Component {
         this.setState({ [id]: value });
 
     validate = () =>
-        this.state.description.length > 0 && this.state.createdby.length > 0;
+        this.state.desc.length > 0 && this.state.createdby.length > 0;
 
     render() {
         const { classes, createRequest } = this.props;
-        const { description, createdby } = this.state;
+        const { desc, createdby } = this.state;
 
         if (this.props.createTodoSuccess) {
             return <Redirect to="/todoview" />;
         }
 
         return (
-            <div className={classes.root}>
-                <form onSubmit={this.handleSubmit}>
-                    <Paper className={classes.paper}>
-                        <Grid
-                            container
-                            direction="column"
-                            justify="center"
-                            alignItems="stretch"
-                            spacing={4}
-                        >
-                            <Grid item align="center">
-                                <NavMenuView />
-                            </Grid>
-
+            <NavMenuView>
+                <div className={classes.root}>
+                    <form onSubmit={this.handleSubmit}>
+                        <Paper className={classes.paper}>
                             <Grid
-                                item
                                 container
-                                spacing={2}
                                 direction="column"
-                                className={classes.formContainer}
+                                justify="center"
+                                alignItems="stretch"
+                                spacing={4}
                             >
-                                <Grid item>
-                                    <TextField
-                                        className={classes.textfield}
-                                        id="description"
-                                        InputProps={{
-                                            disableUnderline: true,
-                                        }}
-                                        label={"Description"}
-                                        onChange={this.handleChange}
-                                        value={description}
-                                    />
-                                </Grid>
 
-                                <Grid item>
-                                    <TextField
-                                        className={classes.textfield}
-                                        InputProps={{
-                                            disableUnderline: true
-                                        }}
-                                        id="createdby"
-                                        label={"created by"}
-                                        value={createdby}
-                                        onChange={this.handleChange}
-                                    />
+                                <Grid
+                                    item
+                                    container
+                                    spacing={2}
+                                    direction="column"
+                                    className={classes.formContainer}
+                                >
+                                    <Grid item>
+                                        <TextField
+                                            className={classes.textfield}
+                                            id="desc"
+                                            InputProps={{
+                                                disableUnderline: true,
+                                            }}
+                                            label={"Description"}
+                                            onChange={this.handleChange}
+                                            value={desc}
+                                        />
+                                    </Grid>
+
+                                    <Grid item>
+                                        <TextField
+                                            className={classes.textfield}
+                                            InputProps={{
+                                                disableUnderline: true
+                                            }}
+                                            id="createdby"
+                                            label={"created by"}
+                                            value={createdby}
+                                            onChange={this.handleChange}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid item align="center">
+                                    <Button
+                                        className={classes.button}
+                                        variant="contained"
+                                        color="primary"
+                                        type="submit"
+                                        disabled={!this.validate()}
+                                    >
+                                        Create TODO
+                                    </Button>
                                 </Grid>
                             </Grid>
-                            <Grid item align="center">
-                                <Button
-                                    className={classes.button}
-                                    variant="contained"
-                                    color="primary"
-                                    type="submit"
-                                    disabled={!this.validate()}
-                                >
-                                    Create TODO
-                                    </Button>
-                            </Grid>
-                        </Grid>
-                    </Paper>
-                </form>
-            </div>
+                        </Paper>
+                    </form>
+                </div>
+            </NavMenuView>
         );
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    createRequest: ({ description, createdby }) =>
-        dispatch(createRequest({ description, createdby }))
+    createRequest: ({ desc, createdby }) =>
+        dispatch(createRequest({ desc, createdby }))
 });
 
 TodoCreateView.propTypes = {

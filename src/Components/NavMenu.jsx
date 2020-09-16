@@ -1,12 +1,13 @@
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Button, Paper, MenuItem, Menu, Toolbar, fade, IconButton, AppBar, withStyles, Typography } from "@material-ui/core";
-import React, { Component } from 'react';
+import React, { Component, children } from 'react';
 import styles from "./StyleHome";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import { viewTodoPageOpen, createTodoPageOpen, menuOpenRequest, menuCloseRequest, homePageOpen }
     from "../Actions/authActions"
 import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class NavMenuView extends Component {
     state = {
@@ -26,29 +27,22 @@ class NavMenuView extends Component {
     viewTodoOpen = (event) => {
         event.preventDefault();
         this.props.viewTodoPageOpen();
+        this.props.history.push('/todoview');
     };
 
     createTodoOpen = (event) => {
         event.preventDefault();
         this.props.createTodoPageOpen();
+        this.props.history.push('/create_todo');
     };
     homeOpen = (event) => {
         event.preventDefault();
         this.props.homePageOpen();
+        this.props.history.push('/');
     }
 
     render() {
-        const { classes } = this.props;
-        if (this.props.home) {
-            return <Redirect to="/" />;
-        }
-        if (this.props.viewTodo) {
-            return <Redirect to="/todoview" />;
-        }
-        if (this.props.create_todo_open) {
-            return <Redirect to="/create_todo" />;
-        }
-
+        const { classes, children } = this.props;
         const menuId = 'primary-search-account-menu';
         const renderMenu = (
             <Menu
@@ -103,6 +97,7 @@ class NavMenuView extends Component {
                     </Toolbar>
                 </AppBar>
                 {renderMenu}
+                {children}
             </div>
         )
     }
@@ -128,7 +123,8 @@ const mapStateToProps = state => {
 }
 
 NavMenuView.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    children: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(NavMenuView));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withRouter(NavMenuView)));
