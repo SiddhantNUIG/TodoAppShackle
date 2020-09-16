@@ -1,26 +1,33 @@
-import React from 'react';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import HomeView from "./Components/Home"
+import TodoView from "./Components/TodoView"
+import TodoCreateView from "./Components/TodoCreate"
+
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  componentDidMount() {
+    //run checkAuthentication
+  }
+
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/" component={HomeView} />
+          <Route exact path="/todoview" component={TodoView} />
+          <Route exact path="/create_todo" component={TodoCreateView} />
+        </Switch>
+      </Router>
+    );
+  }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  //    checkAuthentication: () => dispatch(checkAuthentication())
+});
+
+export default connect(null, mapDispatchToProps)(App);
