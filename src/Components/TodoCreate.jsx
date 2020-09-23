@@ -56,7 +56,9 @@ class TodoCreateView extends Component {
                                 alignItems="stretch"
                                 spacing={4}
                             >
-
+                                <Grid item align="center">
+                                    <Typography className={classes.title} variant="h4">Create Todo</Typography>
+                                </Grid>
                                 <Grid
                                     item
                                     container

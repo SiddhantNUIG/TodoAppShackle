@@ -75,7 +75,7 @@ class NavMenuView extends Component {
 
         return (
             <div>
-                <AppBar position="static" color="transparent">
+                <AppBar position="static" style={{ backgroundColor: "#1682C9" }}>
                     <Toolbar>
                         <div className={classes.menu}>
                             <Typography variant="h6">

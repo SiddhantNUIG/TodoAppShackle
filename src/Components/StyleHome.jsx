@@ -34,7 +34,7 @@ const styles = theme => ({
     },
     button: {
         borderRadius: 15,
-        width: "35%",
+        minWidth: "40%",
         height: "40px",
         backgroundColor: "#1261A0"
     }
